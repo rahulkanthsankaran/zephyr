@@ -42,23 +42,6 @@ const DEFAULT_PRODUCTS = [
     createdAt: Date.now() - 86400000 * 5
   },
   {
-    id: 'zph-003',
-    name: 'Nothing Happened Tee — Hanging',
-    desc: 'Roronoa Zoro "Nothing Happened" design on a premium teal tee. Anime streetwear collab drop.',
-    price: 1399,
-    origPrice: null,
-    category: 'fashion',
-    stock: 22,
-    status: 'active',
-    featured: false,
-    image: 'images/nothing-happened-hanging.png',
-    images: ['images/nothing-happened-hanging.png', 'images/nothing-happened-flat.png'],
-    tags: ['anime', 'onepiece', 'tshirt'],
-    badge: 'NEW',
-    colors: ['#00838f'],
-    createdAt: Date.now() - 86400000 * 1
-  },
-  {
     id: 'zph-004',
     name: 'Nothing Happened Tee — Flat',
     desc: 'Flat-lay edition of the iconic Zoro Nothing Happened shirt. Identical premium quality, different mockup.',
@@ -69,7 +52,7 @@ const DEFAULT_PRODUCTS = [
     status: 'active',
     featured: false,
     image: 'images/nothing-happened-flat.png',
-    images: ['images/nothing-happened-flat.png', 'images/nothing-happened-hanging.png'],
+    images: ['images/nothing-happened-flat.png', 'images/White T.png'],
     tags: ['anime', 'onepiece', 'tshirt'],
     badge: null,
     colors: ['#00838f'],
@@ -86,7 +69,7 @@ const DEFAULT_PRODUCTS = [
     status: 'active',
     featured: true,
     image: 'images/fallen-angel-grey.png',
-    images: ['images/fallen-angel-grey.png', 'images/fallen-angel-hanging.png'],
+    images: ['images/fallen-angel-grey.png', 'images/Grey T.png'],
     tags: ['gothic', 'darkart', 'tshirt'],
     badge: 'SALE',
     colors: ['#9e9e9e'],
@@ -137,7 +120,7 @@ const DEFAULT_PRODUCTS = [
     status: 'active',
     featured: true,
     image: 'images/luffy-wanted-terracotta.png',
-    images: ['images/luffy-wanted-terracotta.png', 'images/luffy-wanted-hanging.png'],
+    images: ['images/luffy-wanted-terracotta.png', 'images/White T.png'],
     tags: ['onepiece', 'anime', 'luffy'],
     badge: 'HOT',
     colors: ['#b5541a'],
@@ -161,23 +144,6 @@ const DEFAULT_PRODUCTS = [
     createdAt: Date.now() - 86400000 * 6
   },
   {
-    id: 'zph-010',
-    name: 'Luffy Wanted — Hanging',
-    desc: 'Premium hanging display version of the Luffy Gear 5 Wanted poster tee. Perfect gift packaging.',
-    price: 1599,
-    origPrice: 1999,
-    category: 'fashion',
-    stock: 9,
-    status: 'active',
-    featured: false,
-    image: 'images/luffy-wanted-hanging.png',
-    images: ['images/luffy-wanted-hanging.png', 'images/luffy-wanted-terracotta.png'],
-    tags: ['onepiece', 'anime', 'luffy', 'hanging'],
-    badge: 'SALE',
-    colors: ['#b5541a'],
-    createdAt: Date.now() - 86400000 * 8
-  },
-  {
     id: 'zph-011',
     name: 'Eren AOT Panel Tee',
     desc: 'Attack on Titan manga panel collage — Eren Rumbling scene. Monochrome print on white unisex tee.',
@@ -193,23 +159,6 @@ const DEFAULT_PRODUCTS = [
     badge: 'NEW',
     colors: ['#ffffff'],
     createdAt: Date.now() - 86400000 * 1.5
-  },
-  {
-    id: 'zph-012',
-    name: 'Fallen Angel — Hanging',
-    desc: 'Gallery-ready hanging display of the Fallen Angel gothic skeleton design. Museum-quality print.',
-    price: 1599,
-    origPrice: 1999,
-    category: 'fashion',
-    stock: 8,
-    status: 'active',
-    featured: false,
-    image: 'images/fallen-angel-hanging.png',
-    images: ['images/fallen-angel-hanging.png', 'images/fallen-angel-grey.png'],
-    tags: ['gothic', 'darkart', 'hanging'],
-    badge: 'SALE',
-    colors: ['#9e9e9e'],
-    createdAt: Date.now() - 86400000 * 9
   },
   {
     id: 'zph-013',
@@ -312,11 +261,96 @@ const DEFAULT_PRODUCTS = [
     badge: null,
     colors: ['#000000'],
     createdAt: Date.now() - 86400000 * 15
+  },
+  {
+    id: 'zph-019',
+    name: 'Zephyr Classic Cap',
+    desc: 'Premium dad hat with embroidered Zephyr logo. Adjustable strap, 100% cotton.',
+    price: 699,
+    origPrice: 999,
+    category: 'accessories',
+    stock: 45,
+    status: 'active',
+    featured: true,
+    image: 'images/cap.jpg',
+    images: ['images/cap.jpg'],
+    tags: ['cap', 'accessories', 'headwear'],
+    badge: 'NEW',
+    colors: ['#000000'],
+    createdAt: Date.now() - 86400000 * 0.1
+  },
+  {
+    id: 'zph-020',
+    name: 'Zephyr Street Kicks',
+    desc: 'Classic streetwear sneakers. High-top design, premium vegan leather, cushioned sole.',
+    price: 3499,
+    origPrice: 4299,
+    category: 'shoes',
+    stock: 20,
+    status: 'active',
+    featured: true,
+    image: 'images/shoes.jpeg',
+    images: ['images/shoes.jpeg'],
+    tags: ['shoes', 'sneakers', 'footwear'],
+    badge: 'HOT',
+    colors: ['#ffffff', '#000000'],
+    createdAt: Date.now() - 86400000 * 0.2
+  },
+  {
+    id: 'zph-021',
+    name: 'Fox Graphic Tee',
+    desc: 'Minimalist fox line-art on premium cotton.',
+    price: 1199,
+    origPrice: null,
+    category: 'fashion',
+    stock: 35,
+    status: 'active',
+    featured: false,
+    image: 'images/fox T.png',
+    images: ['images/fox T.png', 'images/Black T.png'],
+    tags: ['graphic', 'tshirt', 'fox'],
+    badge: null,
+    colors: ['#000000'],
+    createdAt: Date.now() - 86400000 * 0.3
+  },
+  {
+    id: 'zph-022',
+    name: 'Kick Graphic Tee',
+    desc: 'Dynamic kick action graphic tee. Heavyweight fabric.',
+    price: 1299,
+    origPrice: 1599,
+    category: 'fashion',
+    stock: 40,
+    status: 'active',
+    featured: false,
+    image: 'images/Kick T.png',
+    images: ['images/Kick T.png', 'images/White T.png'],
+    tags: ['graphic', 'tshirt', 'action'],
+    badge: 'SALE',
+    colors: ['#ffffff'],
+    createdAt: Date.now() - 86400000 * 0.4
+  },
+  {
+    id: 'zph-023',
+    name: 'Mini Graphic Tee',
+    desc: 'Subtle mini embroidered graphic tee. Perfect for layering.',
+    price: 999,
+    origPrice: null,
+    category: 'fashion',
+    stock: 50,
+    status: 'active',
+    featured: false,
+    image: 'images/mini T.png',
+    images: ['images/mini T.png', 'images/Grey T.png'],
+    tags: ['minimal', 'tshirt'],
+    badge: null,
+    colors: ['#9e9e9e'],
+    createdAt: Date.now() - 86400000 * 0.5
   }
 ];
 
 // ── STORAGE KEY ─────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'zephyr_products_v4';
+const STORAGE_KEY = 'zephyr_products_v5';
 
 // ── PRODUCT STORE ───────────────────────────────────────────────────────────
 const ProductStore = {

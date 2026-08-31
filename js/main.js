@@ -76,7 +76,7 @@ function renderLookbook() {
   const lifestyleImages = [
     { src: 'model/model1.png', alt: 'Zephyr Streetwear Lookbook', label: 'Street Culture' },
     { src: 'model/model2.png', alt: 'Zephyr Model Shot', label: 'Urban Edge' },
-    { src: 'model/spidey.jpeg', alt: 'Zephyr x Spidey', label: 'Anime Collab' }
+    { src: 'images/eren-aot-panel.png', alt: 'Zephyr x AOT Edition', label: 'Anime Collab' }
   ];
 
   // Pick active products for the collage, prioritizing featured items

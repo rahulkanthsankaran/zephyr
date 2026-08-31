@@ -555,6 +555,29 @@ ul { list-style: none; }
 }
 
 /* ══════════════════════════════════════════
+   SPIDEY FEATURED BANNER
+   ══════════════════════════════════════════ */
+.spidey-banner {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  background: #000;
+}
+
+.spidey-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 80vh;
+}
+
+/* ══════════════════════════════════════════
    LOOKBOOK COLLAGE — Fashion Gallery
 ══════════════════════════════════════════ */
 .lookbook {
