@@ -255,8 +255,8 @@ const DEFAULT_PRODUCTS = [
     stock: 45,
     status: 'active',
     featured: true,
-    image: 'images/cap.jpg',
-    images: ['images/cap.jpg'],
+    image: 'images/cap.png',
+    images: ['images/cap.png'],
     tags: ['cap', 'accessories', 'headwear'],
     badge: 'NEW',
     colors: ['#000000'],
@@ -272,8 +272,8 @@ const DEFAULT_PRODUCTS = [
     stock: 20,
     status: 'active',
     featured: false,
-    image: 'images/shoes.jpeg',
-    images: ['images/shoes.jpeg'],
+    image: 'images/shoes.png',
+    images: ['images/shoes.png'],
     tags: ['shoes', 'sneakers', 'footwear'],
     badge: 'HOT',
     colors: ['#ffffff', '#000000'],
@@ -333,7 +333,7 @@ const DEFAULT_PRODUCTS = [
 ];
 
 // ── STORAGE KEY ─────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'zephyr_products_v7';
+const STORAGE_KEY = 'zephyr_products_v8';
 
 // ── PRODUCT STORE ───────────────────────────────────────────────────────────
 const ProductStore = {
