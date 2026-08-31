@@ -272,8 +272,8 @@ const DEFAULT_PRODUCTS = [
     stock: 20,
     status: 'active',
     featured: false,
-    image: 'images/shoes.png',
-    images: ['images/shoes.png'],
+    image: 'images/shoes.jpeg',
+    images: ['images/shoes.jpeg'],
     tags: ['shoes', 'sneakers', 'footwear'],
     badge: 'HOT',
     colors: ['#ffffff', '#000000'],
@@ -317,7 +317,7 @@ const DEFAULT_PRODUCTS = [
 ];
 
 // ── STORAGE KEY ─────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'zephyr_products_v9';
+const STORAGE_KEY = 'zephyr_products_v10';
 
 // ── PRODUCT STORE ───────────────────────────────────────────────────────────
 const ProductStore = {

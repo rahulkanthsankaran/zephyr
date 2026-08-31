@@ -50,7 +50,7 @@ function initLiveSync() {
 
   // Cross-tab storage updates from admin page
   window.addEventListener('storage', (e) => {
-    if (e.key === 'zephyr_products_v4') {
+    if (e.key === 'zephyr_products_v10') {
       syncProducts();
       renderLookbook();
     }
@@ -76,7 +76,7 @@ function renderLookbook() {
   const lifestyleImages = [
     { src: 'model/model1.png', alt: 'Zephyr Streetwear Lookbook', label: 'Street Culture' },
     { src: 'model/model2.png', alt: 'Zephyr Model Shot', label: 'Urban Edge' },
-    { src: 'images/shoes.png', alt: 'Zephyr Street Kicks', label: 'Footwear Collection' }
+    { src: 'images/shoes.jpeg', alt: 'Zephyr Street Kicks', label: 'Footwear Collection' }
   ];
 
   // Pick active products for the collage, prioritizing featured items
