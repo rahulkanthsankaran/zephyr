@@ -978,7 +978,7 @@ function initIntro() {
   if (!overlay || !video) return;
 
   // Only show intro once per session
-  if (sessionStorage.getItem('zephyr-intro-seen')) {
+  if (sessionStorage.getItem('zephyr-intro-seen-v2')) {
     overlay.classList.add('hidden');
     return;
   }
@@ -989,7 +989,7 @@ function initIntro() {
   function dismissIntro() {
     overlay.classList.add('fade-out');
     document.body.classList.remove('intro-active');
-    sessionStorage.setItem('zephyr-intro-seen', '1');
+    sessionStorage.setItem('zephyr-intro-seen-v2', '1');
     setTimeout(() => {
       overlay.classList.add('hidden');
       video.pause();
