@@ -296,23 +296,7 @@ const DEFAULT_PRODUCTS = [
     colors: ['#000000'],
     createdAt: Date.now() - 86400000 * 0.3
   },
-  {
-    id: 'zph-022',
-    name: 'Motion | Kick Graphic Tee',
-    desc: 'Dynamic kick action graphic tee. Heavyweight fabric.',
-    price: 1299,
-    origPrice: 1599,
-    category: 'fashion',
-    stock: 40,
-    status: 'active',
-    featured: false,
-    image: 'images/Kick T.png',
-    images: ['images/Kick T.png'],
-    tags: ['graphic', 'tshirt', 'action'],
-    badge: 'SALE',
-    colors: ['#ffffff'],
-    createdAt: Date.now() - 86400000 * 0.4
-  },
+
   {
     id: 'zph-023',
     name: 'Minimal | Mini Graphic Tee',
@@ -333,7 +317,7 @@ const DEFAULT_PRODUCTS = [
 ];
 
 // ── STORAGE KEY ─────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'zephyr_products_v8';
+const STORAGE_KEY = 'zephyr_products_v9';
 
 // ── PRODUCT STORE ───────────────────────────────────────────────────────────
 const ProductStore = {
