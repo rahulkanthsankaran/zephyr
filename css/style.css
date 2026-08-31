@@ -147,6 +147,7 @@ ul { list-style: none; }
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 
@@ -713,11 +714,11 @@ ul { list-style: none; }
 
 @media (max-width: 480px) {
   .lookbook-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 180px;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 240px;
   }
-  .lookbook-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
-  .lookbook-item:nth-child(7) { grid-column: span 2; }
+  .lookbook-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+  .lookbook-item:nth-child(7) { grid-column: span 1; }
 }
 
 /* ══════════════════════════════════════════
@@ -1874,6 +1875,7 @@ ul { list-style: none; }
     align-items: flex-start;
     overflow-y: auto;
   }
+  .nav-inner { padding: 0 1.25rem; }
   .nav-links.open .nav-link {
     font-size: 1.4rem;
     padding: 0.85rem 0;
@@ -1898,12 +1900,37 @@ ul { list-style: none; }
 
 @media (max-width: 480px) {
   .features-grid { grid-template-columns: 1fr; }
-  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .products-grid { grid-template-columns: 1fr; gap: 1rem; }
   .product-info { padding: 1rem; }
   .hero-title { font-size: 2.5rem; }
+  .hero-stats { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .stat-divider { display: none; }
   .filter-bar { gap: 0.25rem; }
-  .footer-sub-links { flex-direction: column; gap: 0.75rem; }
-  .hero-cta { flex-direction: column; align-items: flex-start; }
+  .footer-sub-links { flex-direction: column; gap: 0.75rem; align-items: flex-start; width: 100%; }
+  .hero-cta { flex-direction: column; align-items: flex-start; width: 100%; }
+  .hero-cta .btn { width: 100%; }
+  
+  .studio-stage-wrap { flex-direction: column; }
+  .studio-left-nav {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .studio-vertical-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .studio-shop-now-wrap {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 /* (Duplicate toast CSS removed — see primary definition above) */
