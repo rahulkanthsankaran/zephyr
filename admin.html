@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Zephyr</title>
+  <meta name="description" content="Zephyr Admin Dashboard — Manage products, inventory, and store settings." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="icon" type="image/png" href="images/logo round.png" />
+</head>
+<body class="admin-body">
+
+  <!-- ═══════════ LOGIN GATE ═══════════ -->
+  <div class="admin-login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <img src="images/logo no bg.png" alt="Zephyr" class="login-logo" />
+      <h2>Admin Access</h2>
+      <p>Enter your admin password to continue.</p>
+      <form id="loginForm" autocomplete="off">
+        <div class="login-input-group">
+          <input type="password" id="loginPassword" placeholder="Enter admin password" autofocus required />
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <button type="submit" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Unlock Dashboard
+        </button>
+      </form>
+      <p style="margin-top:1.5rem;font-size:0.72rem;color:rgba(10,10,10,0.3);">Default password: <strong>admin</strong></p>
+    </div>
+  </div>
+
+  <!-- ═══════════ ADMIN SIDEBAR ═══════════ -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <div class="logo-box">
+        <a href="index.html" class="nav-logo">
+          <img src="images/logo no bg.png" alt="Zephyr" class="logo-img" />
+        </a>
+      </div>
+      <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Main</span>
+      <a href="#" class="sidebar-link" data-tab="dashboard">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="#" class="sidebar-link active" data-tab="products">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Products
+        <span class="sidebar-badge" id="productCountBadge">0</span>
+      </a>
+      <a href="#" class="sidebar-link" data-tab="orders">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Orders
+        <span class="sidebar-badge new" id="orderCountBadge">0</span>
+      </a>
+      <a href="#" class="sidebar-link" data-tab="analytics">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+      <span class="sidebar-nav-label" style="margin-top:1.5rem">Settings</span>
+      <a href="#" class="sidebar-link" data-tab="settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+        Settings
+      </a>
+      <a href="index.html" class="sidebar-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        View Store
+      </a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">A</div>
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name">Admin User</span>
+        <span class="sidebar-user-role">Super Admin</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════ ADMIN MAIN ═══════════ -->
+  <main class="admin-main" id="adminMain">
+
+    <!-- Top Bar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="breadcrumb">
+          <span>Admin</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="breadcrumb-current" id="breadcrumbCurrent">Products</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search products…" id="adminSearch" />
+        </div>
+        <div class="topbar-notif-wrap" id="topbarNotifWrap">
+          <button class="topbar-icon-btn" id="notifBtn" aria-label="Notifications" title="Notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="topbar-notif-dot" id="notifDot"></span>
+          </button>
+          
+          <div class="notif-dropdown" id="notifDropdown">
+            <div class="notif-dropdown-header">
+              <div>
+                <h4>Notifications</h4>
+                <span class="notif-unread-count" id="notifUnreadCount">0 new orders</span>
+              </div>
+              <button class="notif-clear-btn" id="notifClearBtn">Mark all as read</button>
+            </div>
+            <div class="notif-dropdown-list" id="notifList">
+              <!-- Rendered by JS -->
+            </div>
+            <div class="notif-dropdown-footer">
+              <button class="btn-text" id="notifViewOrdersBtn">View all orders in table →</button>
+            </div>
+          </div>
+        </div>
+        <button class="topbar-icon-btn" id="logoutBtn" title="Logout">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+        <div class="topbar-avatar">A</div>
+      </div>
+    </header>
+
+    <!-- Tab: Dashboard -->
+    <div class="admin-tab" id="tab-dashboard">
+      <div class="admin-page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Welcome back, Admin! Here's what's happening.</p>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">💰</div>
+          <div class="stat-card-info">
+            <span class="stat-card-label">Total Revenue</span>
+            <span class="stat-card-value" id="dashTotalRevenue">₹0</span>
+            <span class="stat-card-change up">↑ Live earnings</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">📦</div>
+          <div class="stat-card-info">
+            <span class="stat-card-label">Total Products</span>
+            <span class="stat-card-value" id="dashProductCount">0</span>
+            <span class="stat-card-change up">↑ Active listings</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">🛒</div>
+          <div class="stat-card-info">
+            <span class="stat-card-label">Total Orders</span>
+            <span class="stat-card-value" id="dashOrderCount">0</span>
+            <span class="stat-card-change up">↑ Customer orders</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:linear-gradient(135deg,#10b981,#059669)">👥</div>
+          <div class="stat-card-info">
+            <span class="stat-card-label">Customers</span>
+            <span class="stat-card-value">12,847</span>
+            <span class="stat-card-change up">↑ 340 new this week</span>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-bottom">
+        <div class="recent-products-card">
+          <div class="card-header-row">
+            <h3>Recent Products</h3>
+            <button class="btn-text" data-tab="products" onclick="switchTab('products')">View All →</button>
+          </div>
+          <div id="recentProductsList"></div>
+        </div>
+        <div class="quick-actions-card">
+          <h3>Quick Actions</h3>
+          <div class="quick-actions">
+            <button class="quick-action-btn" onclick="switchTab('products'); setTimeout(()=>document.getElementById('addProductBtn').click(),200)">
+              <span>➕</span> Add Product
+            </button>
+            <button class="quick-action-btn" onclick="switchTab('orders')">
+              <span>📋</span> View Orders
+            </button>
+            <button class="quick-action-btn" onclick="switchTab('analytics')">
+              <span>📊</span> Analytics
+            </button>
+            <button class="quick-action-btn" onclick="switchTab('settings')">
+              <span>⚙️</span> Settings
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Products -->
+    <div class="admin-tab active" id="tab-products">
+      <div class="admin-page-header">
+        <div>
+          <h1>Products</h1>
+          <p>Manage your product catalog with ease.</p>
+        </div>
+        <button class="btn btn-primary" id="addProductBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Product
+        </button>
+      </div>
+
+      <!-- Products Toolbar -->
+      <div class="products-toolbar">
+        <div class="toolbar-left">
+          <div class="admin-filter-tabs">
+            <button class="admin-filter-tab active" data-status="all">All <span id="countAll">0</span></button>
+            <button class="admin-filter-tab" data-status="active">Active <span id="countActive">0</span></button>
+            <button class="admin-filter-tab" data-status="draft">Draft <span id="countDraft">0</span></button>
+            <button class="admin-filter-tab" data-status="archived">Archived <span id="countArchived">0</span></button>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <select class="admin-select" id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="accessories">Accessories</option>
+          </select>
+          <select class="admin-select" id="sortFilter">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="name">Name A–Z</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewTable" title="Table View">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+            <button class="view-btn" id="viewGrid" title="Grid View">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <div class="admin-table-wrap" id="adminTableWrap">
+        <table class="admin-table" id="adminTable">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="selectAll" class="admin-checkbox" /></th>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Sizes</th>
+              <th>Stock</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+          </tbody>
+        </table>
+        <div class="table-empty" id="tableEmpty" style="display:none">
+          <div class="table-empty-icon">📦</div>
+          <h3>No products found</h3>
+          <p>Try adjusting your filters or add a new product.</p>
+          <button class="btn btn-primary" onclick="document.getElementById('addProductBtn').click()">Add Product</button>
+        </div>
+      </div>
+
+      <!-- Products Grid (hidden by default) -->
+      <div class="admin-products-grid" id="adminProductsGrid" style="display:none"></div>
+
+      <!-- Bulk Actions -->
+      <div class="bulk-actions" id="bulkActions" style="display:none">
+        <span id="selectedCount">0</span> selected
+        <button class="bulk-btn" onclick="bulkDelete()">🗑 Delete</button>
+        <button class="bulk-btn" onclick="bulkSetStatus('active')">✅ Set Active</button>
+        <button class="bulk-btn" onclick="bulkSetStatus('archived')">📁 Archive</button>
+        <button class="bulk-btn danger" onclick="clearSelection()">✕ Clear</button>
+      </div>
+    </div>
+
+    <!-- Tab: Orders -->
+    <div class="admin-tab" id="tab-orders">
+      <div class="admin-page-header">
+        <div><h1>Orders</h1><p>Manage customer orders and shipments.</p></div>
+      </div>
+
+      <!-- Orders Toolbar -->
+      <div class="orders-toolbar">
+        <div class="toolbar-left">
+          <div class="order-search-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="orderSearchInput" placeholder="Search by Order ID (e.g. ZPH-MT...), customer, phone..." />
+            <button type="button" class="btn-search-order" id="orderSearchBtn">Search</button>
+            <button type="button" class="btn-clear-search" id="orderClearSearchBtn" style="display:none" title="Clear">✕</button>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <select class="admin-select" id="orderStatusFilter">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <select class="admin-select" id="orderSortFilter">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="total-desc">Total: High → Low</option>
+            <option value="total-asc">Total: Low → High</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="ordersTable">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+        <div class="table-empty" id="orderTableEmpty" style="display:none">
+          <div class="table-empty-icon">🔍</div>
+          <h3>No matching orders found</h3>
+          <p>We couldn't find any orders matching your search query.</p>
+          <button class="btn btn-primary" onclick="resetOrderSearch()">Clear Search</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Analytics -->
+    <div class="admin-tab" id="tab-analytics">
+      <div class="admin-page-header">
+        <div>
+          <h1>Analytics</h1>
+          <p>Sales insights and performance metrics.</p>
+        </div>
+        <div class="analytics-period-selector">
+          <button class="period-btn active" data-period="7d">7 Days</button>
+          <button class="period-btn" data-period="30d">30 Days</button>
+          <button class="period-btn" data-period="all">All Time</button>
+        </div>
+      </div>
+
+      <!-- KPI Cards Row -->
+      <div class="analytics-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="kpi-content">
+            <span class="kpi-label">Total Revenue</span>
+            <span class="kpi-value" id="kpiRevenue">₹0</span>
+            <span class="kpi-change up" id="kpiRevenueChange">—</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="kpi-content">
+            <span class="kpi-label">Total Orders</span>
+            <span class="kpi-value" id="kpiOrders">0</span>
+            <span class="kpi-change up" id="kpiOrdersChange">—</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="kpi-content">
+            <span class="kpi-label">Avg. Order Value</span>
+            <span class="kpi-value" id="kpiAOV">₹0</span>
+            <span class="kpi-change" id="kpiAOVChange">—</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:linear-gradient(135deg,#10b981,#059669)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="kpi-content">
+            <span class="kpi-label">Items Sold</span>
+            <span class="kpi-value" id="kpiItemsSold">0</span>
+            <span class="kpi-change up" id="kpiItemsChange">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="analytics-charts-row">
+        <!-- Revenue Chart -->
+        <div class="analytics-card chart-card-wide">
+          <div class="analytics-card-header">
+            <h3>Revenue Over Time</h3>
+            <span class="chart-legend-inline"><span class="legend-dot" style="background:#6366f1"></span> Revenue</span>
+          </div>
+          <div class="chart-container" id="revenueChartContainer">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+        <!-- Order Status Donut -->
+        <div class="analytics-card chart-card-narrow">
+          <div class="analytics-card-header">
+            <h3>Order Status</h3>
+          </div>
+          <div class="donut-chart-wrap">
+            <canvas id="orderStatusChart"></canvas>
+            <div class="donut-center" id="donutCenter">
+              <span class="donut-total" id="donutTotal">0</span>
+              <span class="donut-label">Orders</span>
+            </div>
+          </div>
+          <div class="donut-legend" id="donutLegend"></div>
+        </div>
+      </div>
+
+      <!-- Second Row: Top Products & Category -->
+      <div class="analytics-charts-row">
+        <!-- Top Selling Products -->
+        <div class="analytics-card chart-card-wide">
+          <div class="analytics-card-header">
+            <h3>Top Selling Products</h3>
+            <span class="analytics-card-sub" id="topProductsSub">By units sold</span>
+          </div>
+          <div class="top-products-list" id="topProductsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <!-- Category Breakdown -->
+        <div class="analytics-card chart-card-narrow">
+          <div class="analytics-card-header">
+            <h3>Sales by Category</h3>
+          </div>
+          <div class="category-bars-list" id="categoryBarsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Third Row: Stock Alerts + Recent Activity -->
+      <div class="analytics-charts-row">
+        <!-- Stock Alerts -->
+        <div class="analytics-card chart-card-narrow">
+          <div class="analytics-card-header">
+            <h3>⚠️ Stock Alerts</h3>
+            <span class="analytics-card-sub" id="stockAlertCount">0 low stock</span>
+          </div>
+          <div class="stock-alerts-list" id="stockAlertsList">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <!-- Recent Activity Timeline -->
+        <div class="analytics-card chart-card-wide">
+          <div class="analytics-card-header">
+            <h3>Recent Activity</h3>
+          </div>
+          <div class="activity-timeline" id="activityTimeline">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Settings -->
+    <div class="admin-tab" id="tab-settings">
+      <div class="admin-page-header">
+        <div>
+          <h1>Settings</h1>
+          <p>Configure your store preferences.</p>
+        </div>
+        <button class="btn-primary" id="btnSaveSettings">
+          <span>💾</span> Save Settings
+        </button>
+      </div>
+      
+      <div class="settings-grid">
+        <!-- General Settings -->
+        <div class="settings-card">
+          <div class="settings-card-header">
+            <div class="settings-icon">🏪</div>
+            <h3>General Details</h3>
+          </div>
+          <div class="settings-card-body">
+            <div class="form-group full-width">
+              <label for="settingStoreName">Store Name</label>
+              <input type="text" id="settingStoreName" value="Zephyr" />
+            </div>
+            <div class="form-group full-width">
+              <label for="settingSupportEmail">Support Email</label>
+              <input type="email" id="settingSupportEmail" value="support@zephyr.in" />
+            </div>
+            <div class="form-group full-width">
+              <label for="settingCurrency">Currency Symbol</label>
+              <input type="text" id="settingCurrency" value="₹" />
+            </div>
+            <div class="form-group full-width">
+              <label for="settingAddress">Store Address</label>
+              <textarea id="settingAddress" rows="2">New Delhi, India</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping Rules -->
+        <div class="settings-card">
+          <div class="settings-card-header">
+            <div class="settings-icon">📦</div>
+            <h3>Shipping Rules</h3>
+          </div>
+          <div class="settings-card-body">
+            <div class="form-group full-width">
+              <label for="settingShippingRate">Standard Shipping Rate (₹)</label>
+              <input type="number" id="settingShippingRate" value="99" min="0" />
+            </div>
+            <div class="form-group full-width">
+              <label for="settingFreeShippingThreshold">Free Shipping Threshold (₹)</label>
+              <input type="number" id="settingFreeShippingThreshold" value="1999" min="0" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="settings-card">
+          <div class="settings-card-header">
+            <div class="settings-icon">💳</div>
+            <h3>Payment Methods</h3>
+          </div>
+          <div class="settings-card-body">
+            <div class="settings-toggle-row">
+              <div class="settings-toggle-info">
+                <strong>Cash on Delivery (COD)</strong>
+                <span>Allow customers to pay upon delivery</span>
+              </div>
+              <label class="toggle-label">
+                <input type="checkbox" id="settingCodEnable" class="toggle-input" checked />
+                <span class="toggle-switch"></span>
+              </label>
+            </div>
+            <div class="settings-toggle-row">
+              <div class="settings-toggle-info">
+                <strong>Credit/Debit Cards</strong>
+                <span>Accept Visa, Mastercard, RuPay</span>
+              </div>
+              <label class="toggle-label">
+                <input type="checkbox" id="settingCardEnable" class="toggle-input" />
+                <span class="toggle-switch"></span>
+              </label>
+            </div>
+            <div class="settings-toggle-row">
+              <div class="settings-toggle-info">
+                <strong>UPI Payments</strong>
+                <span>Accept GPay, PhonePe, Paytm</span>
+              </div>
+              <label class="toggle-label">
+                <input type="checkbox" id="settingUpiEnable" class="toggle-input" />
+                <span class="toggle-switch"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tax Settings -->
+        <div class="settings-card">
+          <div class="settings-card-header">
+            <div class="settings-icon">🧾</div>
+            <h3>Tax Settings</h3>
+          </div>
+          <div class="settings-card-body">
+            <div class="form-group full-width">
+              <label for="settingTaxRate">Default Tax Rate (%)</label>
+              <input type="number" id="settingTaxRate" value="18" min="0" max="100" />
+              <p class="settings-hint">This tax rate is for informational display, currently all prices are inclusive of taxes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════ PRODUCT MODAL (Add/Edit) ═══════════ -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="admin-modal" id="productModal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Add New Product</h2>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <form class="modal-form" id="productForm">
+      <input type="hidden" id="productId" />
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="productName">Product Name *</label>
+          <input type="text" id="productName" placeholder="e.g. ZephyrPro Max Headphones" required />
+        </div>
+        <div class="form-group full-width">
+          <label for="productDesc">Description *</label>
+          <textarea id="productDesc" placeholder="Describe the product features and benefits…" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Price (₹) *</label>
+          <input type="number" id="productPrice" placeholder="0" min="0" step="1" required />
+        </div>
+        <div class="form-group">
+          <label for="productOrigPrice">Original Price (₹)</label>
+          <input type="number" id="productOrigPrice" placeholder="0" min="0" step="1" />
+        </div>
+        <div class="form-group">
+          <label for="productCategory">Category *</label>
+          <select id="productCategory" required>
+            <option value="">Select category</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="accessories">Accessories</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="productStock">Stock *</label>
+          <input type="number" id="productStock" placeholder="0" min="0" required />
+        </div>
+        <div class="form-group">
+          <label for="productStatus">Status *</label>
+          <select id="productStatus" required>
+            <option value="active">Active</option>
+            <option value="draft">Draft</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="productBadge">Badge Text</label>
+          <input type="text" id="productBadge" placeholder="e.g. NEW, SALE, HOT" maxlength="12" />
+        </div>
+        <div class="form-group full-width">
+          <div class="photo-section-header">
+            <label class="photo-section-title">Product Photos & Multi-Angle Views</label>
+            <label class="toggle-label photo-bg-toggle" title="Toggle background removal on or off for photos">
+              <input type="checkbox" id="autoRemoveBg" class="toggle-input" />
+              <span class="toggle-switch"></span>
+              <span class="toggle-text">🪄 Remove Background</span>
+            </label>
+          </div>
+
+          <!-- Multi-Image Gallery Cards Strip -->
+          <div class="multi-photos-container">
+            <div class="multi-photos-gallery" id="multiPhotosGallery">
+              <!-- Rendered dynamically by JS: Cards for each view -->
+            </div>
+          </div>
+
+          <!-- Add Photo Controls -->
+          <div class="add-photo-controls">
+            <div class="image-input-group">
+              <input type="text" id="addPhotoUrlInput" placeholder="Paste image URL (e.g. images/... or https://...)" />
+              <button type="button" class="btn-add-url-photo" id="btnAddPhotoUrl" title="Add Image URL as a new view">
+                <span>➕</span> Add URL
+              </button>
+              <button type="button" class="upload-btn upload-multi-btn" id="uploadImageBtn" title="Upload one or multiple images">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Upload Photos
+              </button>
+              <button type="button" class="btn-bg-remove" id="btnRemoveAllBg" title="Remove background from all product photos">
+                🪄 Remove All BG
+              </button>
+              <input type="file" id="imageFileInput" multiple accept="image/*" style="display: none;" />
+            </div>
+            <span class="form-help-hint">Tip: Add multiple photos for 360° views (Front, Back, Close-up, Flat-lay). The 1st photo is used as the main storefront cover.</span>
+          </div>
+
+          <!-- Hidden primary image input -->
+          <input type="hidden" id="productImage" />
+        </div>
+        <div class="form-group full-width">
+          <label>Available Sizes</label>
+          <div class="size-pill-group">
+            <label class="size-pill-check">
+              <input type="checkbox" name="productSize" value="S" id="sizeOptS" checked />
+              <span>S</span>
+            </label>
+            <label class="size-pill-check">
+              <input type="checkbox" name="productSize" value="M" id="sizeOptM" checked />
+              <span>M</span>
+            </label>
+            <label class="size-pill-check">
+              <input type="checkbox" name="productSize" value="L" id="sizeOptL" checked />
+              <span>L</span>
+            </label>
+            <label class="size-pill-check">
+              <input type="checkbox" name="productSize" value="XL" id="sizeOptXL" checked />
+              <span>XL</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label>Available Colors</label>
+          <div class="color-pill-group">
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#0a0a0a" id="colorOptBlack" />
+              <span class="color-pill-swatch" style="--swatch-color:#0a0a0a"></span>
+              <span class="color-pill-label">Black</span>
+            </label>
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#ffffff" id="colorOptWhite" />
+              <span class="color-pill-swatch" style="--swatch-color:#ffffff"></span>
+              <span class="color-pill-label">White</span>
+            </label>
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#4b0f18" id="colorOptMaroon" />
+              <span class="color-pill-swatch" style="--swatch-color:#4b0f18"></span>
+              <span class="color-pill-label">Maroon</span>
+            </label>
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#b8b0d4" id="colorOptLavender" />
+              <span class="color-pill-swatch" style="--swatch-color:#b8b0d4"></span>
+              <span class="color-pill-label">Lavender</span>
+            </label>
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#f0c8d8" id="colorOptLightPink" />
+              <span class="color-pill-swatch" style="--swatch-color:#f0c8d8"></span>
+              <span class="color-pill-label">Light Pink</span>
+            </label>
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#1e2a4a" id="colorOptNavyBlue" />
+              <span class="color-pill-swatch" style="--swatch-color:#1e2a4a"></span>
+              <span class="color-pill-label">Navy Blue</span>
+            </label>
+            <label class="color-pill-check">
+              <input type="checkbox" name="productColor" value="#2e4a1e" id="colorOptBottleGreen" />
+              <span class="color-pill-swatch" style="--swatch-color:#2e4a1e"></span>
+              <span class="color-pill-label">Bottle Green</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label for="productTags">Tags (comma separated)</label>
+          <input type="text" id="productTags" placeholder="e.g. wireless, premium, bestseller" />
+        </div>
+        <div class="form-group full-width">
+          <label class="toggle-label">
+            <input type="checkbox" id="productFeatured" class="toggle-input" />
+            <span class="toggle-switch"></span>
+            Featured Product
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="modalSaveBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Save Product
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ═══════════ DELETE CONFIRM MODAL ═══════════ -->
+  <div class="modal-overlay" id="deleteOverlay"></div>
+  <div class="admin-modal delete-modal" id="deleteModal">
+    <div class="delete-modal-icon">🗑️</div>
+    <h2>Delete Product?</h2>
+    <p>Are you sure you want to delete <strong id="deleteProductName"></strong>? This action cannot be undone.</p>
+    <div class="modal-footer" style="justify-content:center;gap:1rem;margin-top:1.5rem">
+      <button class="btn btn-ghost" id="deleteCancelBtn">Cancel</button>
+      <button class="btn" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:white" id="deleteConfirmBtn">Delete</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ ORDER DETAILS MODAL ═══════════ -->
+  <div class="modal-overlay" id="orderModalOverlay"></div>
+  <div class="admin-modal order-modal" id="orderModal">
+    <div class="modal-header">
+      <div>
+        <div class="order-modal-sub" id="orderModalDate">26 Aug 2026, 10:25 pm</div>
+        <h2 id="orderModalId" style="font-family:var(--font-display);letter-spacing:1px">Order #ZPH-MTAC40YLS41</h2>
+      </div>
+      <button type="button" class="modal-close-btn" id="orderModalClose" onclick="closeOrderModal()" aria-label="Close" title="Close">✕</button>
+    </div>
+    
+    <div class="order-modal-body">
+      <!-- Customer Information Card -->
+      <div class="order-section-card">
+        <h3 class="order-section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Customer Information
+        </h3>
+        <div class="order-customer-grid">
+          <div class="order-info-item">
+            <span class="info-label">Customer Name</span>
+            <span class="info-val font-bold" id="orderCustName">—</span>
+          </div>
+          <div class="order-info-item">
+            <span class="info-label">Phone Number</span>
+            <a href="#" class="info-val info-link" id="orderCustPhone">—</a>
+          </div>
+          <div class="order-info-item">
+            <span class="info-label">Email Address</span>
+            <a href="#" class="info-val info-link" id="orderCustEmail">—</a>
+          </div>
+          <div class="order-info-item">
+            <span class="info-label">Order Status</span>
+            <div class="order-status-select-wrap">
+              <select id="orderStatusSelect" class="order-status-select">
+                <option value="Pending">Pending</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+          <div class="order-info-item full-width">
+            <span class="info-label">Shipping & Delivery Address</span>
+            <span class="info-val address-val" id="orderCustAddress">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items Ordered -->
+      <div class="order-section-card">
+        <h3 class="order-section-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Ordered Items (<span id="orderItemCount">0</span>)
+        </h3>
+        <div class="order-items-list" id="orderItemsList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Financial Breakdown -->
+      <div class="order-financial-breakdown">
+        <div class="breakdown-row">
+          <span>Subtotal</span>
+          <span id="orderSubtotal">₹0</span>
+        </div>
+        <div class="breakdown-row">
+          <span>Shipping Fee</span>
+          <span class="free-text" id="orderShipping">FREE</span>
+        </div>
+        <div class="breakdown-row">
+          <span>Payment Method</span>
+          <span class="payment-badge">Cash on Delivery (COD)</span>
+        </div>
+        <div class="breakdown-divider"></div>
+        <div class="breakdown-row total-row">
+          <span>Grand Total</span>
+          <span class="total-val" id="orderGrandTotal">₹0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost" onclick="printOrderInvoice()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Invoice
+      </button>
+      <button type="button" class="btn btn-primary" id="orderSaveStatusBtn">
+        Save & Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="admin-toast" id="adminToast">
+    <span class="toast-icon" id="adminToastIcon">✓</span>
+    <span id="adminToastMsg">Product saved!</span>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
